@@ -1,10 +1,24 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Titre de la page E</title>
+</head>
+<body>
 <?php
 
-echo "coucou <br />";
+session_start();
+include "allinclude.php";
 
-echo "envie de coder";
-//TODO: Prendre un clavier top
-function toto($param1){
-    echo "oui ?";
+
+
+if (!isset($_POST["login"])){
+    AfficheFormulaire();
 }
+
+?>
+</body>
+</html>
+
+
 
