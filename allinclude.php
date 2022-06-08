@@ -1,5 +1,5 @@
 <?php
 
-include "f-affichage.php";
-include "f-traitement.php";
+include "f_securite.php";
+include "f_navigation.php";
 include "database.php";

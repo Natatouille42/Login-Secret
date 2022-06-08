@@ -1,24 +1,29 @@
-<!doctype html>
-<html lang="fr">
+<!DOCTYPE html>
+<?php
+session_start();
+
+include "allinclude.php";
+?>
+<html>
+
 <head>
-    <meta charset="utf-8">
-    <title>Titre de la page E</title>
+    <title>Titre affiché dans la barre de titre du navigateur</title>
 </head>
+
 <body>
 <?php
-
-session_start();
-include "allinclude.php";
-
-
-
-if (!isset($_POST["login"])){
-    AfficheFormulaire();
+if (isset($_POST["login"])) {
+    LogIn($_POST["login"], $_POST["pass"], $utilisateurs);
 }
+LogOut();
+
+AfficheFormulaire();
+AfficheOut();
+
+AffichePage($page);
+AfficheLien($page);
 
 ?>
 </body>
+
 </html>
-
-
-
