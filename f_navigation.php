@@ -1,50 +1,53 @@
 <?php
 
-function AfficheFormulaire(){
-    if(isset($_GET["message"])){
-        echo $_GET["message"];
-    }
-    if (!isset($_SESSION["login"])){
-        echo "
-        <form method='post' action='index.php'>
-        <input type='text' name='login' placeholder='username'><br>
-        <input type='password' name='pass' placeholder='password'><br>
-        <input type='submit' value='Me connecter'>        
-        ";
-    }
-}
+function Routage($utilisateurs, $page){
 
-function AffichePage($page){
+    ###TRAITEMENT###
+
+    if (isset ($_POST["login"]) and !isset ($_SESSION["login"])) {
+        LogIn($_POST["login"], $_POST["pass"], $utilisateurs);
+    }
+    if (isset($_GET["logout"]) and ($_GET["logout"])=="true") {
+        LogOut();
+    }
+
+    ###AFFICHAGE###
+
     if (isset($_SESSION["login"])){
-        foreach ($page as $key => $value){
-            echo "<a href='index.php?page=".$key."'>".$value["nom_lien"]."</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-        }echo "<hr>";
-    }
-}
-
-
-function AfficheLien($page){
-    if(isset($_GET["page"])){
-        if (isset($_SESSION["login"])) {
-            echo $page[$_GET["page"]]["contenu"];
-        }else{
-            Redirect("Veuillez vous connecter pour accéder au lien.");
+        AfficheMenu($page);
+        AfficheLien($page);
+    }else{
+        if (isset($_GET["page"])){
+            Redirect("Veuillez vous connecter pour accéder au lien");
         }
     }
+    AfficheFormulaire();
+
 }
 
-function AfficheOut(){
-    if (isset($_SESSION["login"])) {
-        echo "<a href='index.php?session=out'>Me déconnecter</><br><br>";
-        echo "<hr>";
+function AfficheMenu($pages){
+    foreach ($pages as $key => $value){
+        echo "<a href='index.php?page=".$key."'>".$value['nom_lien']."</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+    }
+    echo "<br><br>";
+    echo "<a href='index.php?logout=true'>Me déconnecter</a>";
+}
+
+function AfficheLien($pages){
+    if (isset($_GET["page"])){
+        echo $pages[$_GET["page"]]["contenu"];
     }
 }
 
-function Redirect($message){
-    sleep(1);
-    header("Location: index.php?message=".$message."");
-}
-
-function Routage(){
-
+function AfficheFormulaire(){
+    if (isset($_GET["message"])){
+        echo $_GET["message"];
+    }
+    echo"
+    <form method='post' action='index.php'>
+    <input type='text' name='login' placeholder='Entrez votre login'>
+    <input type='password' name='pass' placeholder='Entrez votre mot de passe'>
+    <input type='submit' value='Me connecter'>
+    </form>
+    ";
 }
