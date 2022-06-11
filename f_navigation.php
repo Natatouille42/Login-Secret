@@ -1,6 +1,6 @@
 <?php
 
-function Routage($utilisateurs, $page){
+function Routage($utilisateurs, $page, $tarif){
 
     ###TRAITEMENT###
 
@@ -10,18 +10,32 @@ function Routage($utilisateurs, $page){
     if (isset($_GET["logout"]) and ($_GET["logout"])=="true") {
         LogOut();
     }
+    if (isset($_SESSION["login"])){
+        Panier();
+    }
+    if (isset($_GET["page"]) and ($_GET["page"])=='index'){
+        $Checkout=CalculPrix($tarif);
+        $total=CalculTotal($Checkout);
+    }
+
+
 
     ###AFFICHAGE###
 
     if (isset($_SESSION["login"])){
         AfficheMenu($page);
-        AfficheLien($page);
+        AfficheLien($page, $tarif);
+        if (isset($_GET["page"]) and $_GET["page"]=='index'){
+            AffichePanier($Checkout, $total);
+        }
     }else{
         if (isset($_GET["page"])){
             Redirect("Veuillez vous connecter pour accéder au lien");
         }
     }
-    AfficheFormulaire();
+    if (!isset($_SESSION["login"])) {
+        AfficheFormulaire();
+    }
 
 }
 
@@ -33,9 +47,16 @@ function AfficheMenu($pages){
     echo "<a href='index.php?logout=true'>Me déconnecter</a>";
 }
 
-function AfficheLien($pages){
+function AfficheLien($pages, $tarif){
     if (isset($_GET["page"])){
-        echo $pages[$_GET["page"]]["contenu"];
+        echo $pages[$_GET["page"]]["contenu"]["titre"]."<br><br>";
+        echo $pages[$_GET["page"]]["contenu"]["description"]."<br><br>";
+        if ($_GET["page"]!=='index'){
+            foreach ($pages[$_GET["page"]]["contenu"]["articles"] as $key){
+                echo "<a href='index.php?page=".$_GET["page"]."&article=".$key."'>".$key."</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                echo $tarif[$key]."€<br>";
+            }
+        }
     }
 }
 
@@ -50,4 +71,12 @@ function AfficheFormulaire(){
     <input type='submit' value='Me connecter'>
     </form>
     ";
+}
+
+function AffichePanier($Checkout, $total){
+    foreach ($Checkout as $produit => $value){
+        echo $value["quantité"]." x ".$produit." = ".$value["somme"]."€<br>";
+    }
+    echo "<hr>";
+    echo "total: ".$total." €";
 }
