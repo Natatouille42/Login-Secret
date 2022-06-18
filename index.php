@@ -11,6 +11,7 @@ include "allinclude.php";
 <body>
 
 <?php
+
 Routage($utilisateurs, $page, $tarif);
 
 ?>
