@@ -16,7 +16,7 @@ function Routage($page, $tarif, $utilisateurs){
     #Sécurisé
     if (isset($_SESSION["login"])){
         AfficheMenu($page);
-        AffichePage($page, $tarif);
+        AffichePage($page, $tarif, $utilisateurs);
     #Anonyme
     }else{
     #Redirection spéciale hacker
@@ -55,7 +55,7 @@ function AfficheMenu($pages){
     echo "</div>";
 }
 
-function AffichePage($pages, $tarif){
+function AffichePage($pages, $tarif, $utilisateurs){
     echo "<div class='row g-0' id='myrow'>";
     echo "<div class='page col-lg-9'>";
     if (isset ($_GET["page"])){
@@ -70,16 +70,16 @@ function AffichePage($pages, $tarif){
     }
     echo "</div>";
     echo "<div class='panier col-lg-3'>";
-    AffichePanier($tarif, $pages);
+    AffichePanier($tarif, $pages, $utilisateurs);
     echo "</div>";
     echo "</div>";
 }
 
-function AffichePanier($tarif, $page){
+function AffichePanier($tarif, $page, $utilisateurs){
     echo "Bonjour, ".$_SESSION["login"]."!<br><br>";
     echo "Votre panier :<br>";
     if (isset($_SESSION["panier"])) {
-        $resultat = CalculArticle($tarif);
+        $resultat = CalculArticle($tarif, $utilisateurs);
         $total = CalculTotal($resultat);
         foreach ($_SESSION["panier"] as $categorie => $donnee){
             echo "<h5><br>".$page[$categorie]["nom_lien"]."</h5>";

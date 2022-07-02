@@ -2,7 +2,7 @@
 
 function LogIn($login, $pass, $utilisateurs){
     if (isset($utilisateurs[$login])){
-        if ($pass==$utilisateurs[$login]){
+        if ($pass==$utilisateurs[$login]["pass"]){
             $_SESSION["login"]=$login;
         }else{
             Redirect("Mot de passe invalide");

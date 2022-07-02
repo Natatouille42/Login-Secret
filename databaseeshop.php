@@ -1,10 +1,22 @@
 <?php
 
 $utilisateurs=array(
-  "lionel"=>"verrin",
-  "natacha"=>"crémant",
-  "jeanne"=>"magnolia",
-  "louis"=>"avion"
+  "lionel"=>array(
+      "pass"=>"verrin",
+      "reduction"=>0.7,
+  ),
+  "natacha"=>array(
+      "pass"=>"crémant",
+      "reduction"=>0.75,
+  ),
+  "jeanne"=>array(
+      "pass"=>"magnolia",
+      "reduction"=>0.8,
+  ),
+  "louis"=>array(
+      "pass"=>"avion",
+      "reduction"=>0.65,
+  ),
 );
 
 $page=array(
