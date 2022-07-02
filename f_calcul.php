@@ -14,9 +14,10 @@ function AjoutPanier(){
 
 function CalculArticle($tarif, $utilisateurs){
     foreach ($_SESSION["panier"] as $categorie => $produits){
+        $reduction[$categorie]=$utilisateurs[$_SESSION["login"]]["reduction"][$categorie];
         foreach ($produits as $produit => $quantite) {
             $prix = $tarif[$produit];
-            $resultat[$produit] = $prix * $quantite * $utilisateurs[$_SESSION["login"]]["reduction"];
+            $resultat[$produit] = $prix * $quantite * $reduction[$categorie];
         }
     }
     return $resultat;

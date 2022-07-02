@@ -3,19 +3,39 @@
 $utilisateurs=array(
   "lionel"=>array(
       "pass"=>"verrin",
-      "reduction"=>0.7,
+      "reduction"=>array(
+          "legumes"=>0.5,
+          "fruits"=>1,
+          "cremerie"=>1,
+          "epicerie"=>0.85,
+      ),
   ),
   "natacha"=>array(
       "pass"=>"crémant",
-      "reduction"=>0.75,
+      "reduction"=>array(
+          "legumes"=>1,
+          "fruits"=>0.75,
+          "cremerie"=>1,
+          "epicerie"=>0.95,
+      ),
   ),
   "jeanne"=>array(
       "pass"=>"magnolia",
-      "reduction"=>0.8,
+      "reduction"=>array(
+          "legumes"=>1,
+          "fruits"=>1,
+          "cremerie"=>0.6,
+          "epicerie"=>0.8,
+      ),
   ),
   "louis"=>array(
       "pass"=>"avion",
-      "reduction"=>0.65,
+      "reduction"=>array(
+          "legumes"=>0.5,
+          "fruits"=>0.9,
+          "cremerie"=>1,
+          "epicerie"=>1,
+      ),
   ),
 );
 
