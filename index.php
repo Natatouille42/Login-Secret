@@ -4,18 +4,23 @@
 session_start();
 include "allinclude.php";
 ?>
+
 <head>
-    <title>Titre affiché dans la barre de titre du navigateur</title>
+    <link href="bootstrap.css" rel="stylesheet">
+    <title>Titre</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+<div>
 
 <?php
 
-Routage($utilisateurs, $page, $tarif);
+Routage($page, $tarif, $utilisateurs);
 
 ?>
-
+</div>
+<script src="bootstrap.bundle.js"></script>
 </body>
 
 </html>

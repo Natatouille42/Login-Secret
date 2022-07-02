@@ -1,32 +1,30 @@
 <?php
 
-function AjoutProduit(){
-    if (isset($_GET["article"])) {
-        $article = $_GET["article"];
-        if (!isset($_SESSION["panier"][$article])) {
-            $_SESSION["panier"][$article] = 1;
-        } else {
-            $_SESSION["panier"][$article]++;
+function AjoutPanier(){
+    if (isset ($_GET["produit"])){
+        $produit=$_GET["produit"];
+        $categorie=$_GET["page"];
+        if (!isset ($_SESSION["panier"][$categorie][$produit])){
+            $_SESSION["panier"][$categorie][$produit]=1;
+        }else{
+            $_SESSION["panier"][$categorie][$produit]++;
         }
     }
 }
 
-function CalculPrix($tarif){
-    if (isset ($_SESSION["panier"])){
-        foreach (($_SESSION["panier"]) as $legume => $quantite){
-            $prix=round ($tarif[$legume],2);
-            $article=($_SESSION["panier"][$legume]);
-            $resultat[$legume]["quantite"]=$article;
-            $resultat[$legume]["somme"]=$article*$prix;
-        }return $resultat;
-    }else{
-        return false;
+function CalculArticle($tarif){
+    foreach ($_SESSION["panier"] as $categorie => $produits){
+        foreach ($produits as $produit => $quantite) {
+            $prix = $tarif[$produit];
+            $resultat[$produit] = $prix * $quantite;
+        }
     }
+    return $resultat;
 }
 
-function CalculTotal($Checkout){
+function CalculTotal($panier){
     $total=0;
-    foreach ($Checkout as $key =>$value){
-        $total=$total+$value["somme"];
+    foreach ($panier as $item => $soustotal){
+        $total=$total+$soustotal;
     }return $total;
 }

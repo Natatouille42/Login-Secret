@@ -2,7 +2,9 @@
 
 $utilisateurs=array(
   "lionel"=>"verrin",
-  "natacha"=>"crémant"
+  "natacha"=>"crémant",
+  "jeanne"=>"magnolia",
+  "louis"=>"avion"
 );
 
 $page=array(
@@ -10,11 +12,11 @@ $page=array(
     "nom_lien"=>"accueil",
     "contenu"=>array(
         "titre"=>"<h4>Vous êtes sur la page accueil</h4>",
-        "description"=>"Votre panier:"
+        "description"=>"Cliquez sur les rayons pour choisir des produits",
   )
   ),
 
-  'légumes'=> array(
+  'legumes'=> array(
       "nom_lien"=>"légumes",
       "contenu"=> array(
           "titre"=>"<h4>Vous êtes au rayon légumes</h4>",
@@ -40,7 +42,7 @@ $page=array(
         )
     ),
 
-    'crémerie'=> array(
+    'cremerie'=> array(
         "nom_lien"=>"crémerie",
         "contenu"=> array(
             "titre"=>"<h4>Vous êtes au rayon crémerie</h4>",
@@ -53,7 +55,7 @@ $page=array(
         )
     ),
 
-    'épicerie'=> array(
+    'epicerie'=> array(
         "nom_lien"=>"épicerie",
         "contenu"=> array(
             "titre"=>"<h4>Vous êtes au rayon épicerie</h4>",

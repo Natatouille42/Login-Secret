@@ -1,0 +1,18 @@
+.container{
+    width: 100%;
+}
+
+.menu{
+    background-color: gray;
+    padding: 10px 20px;
+    height: 150px;
+}
+
+.panier{
+    background-color: lightgray;
+    padding: 15px;
+}
+
+#myrow{
+    padding: 0px 20px;
+}
